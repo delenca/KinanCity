@@ -68,12 +68,6 @@ public class AccountCreationWorker implements Runnable {
 
 	private ProxyManager proxyManager;
 
-	@Setter
-	private boolean dryRun = false;
-
-	@Setter
-	private int dumpResult = PtcSession.NEVER;
-
 	public AccountCreationWorker(AccountCreationQueue accountCreationQueue, String name, CaptchaProvider captchaProvider, ProxyManager proxyManager, CreationCallbacks callbacks) {
 		this.status = RunnerStatus.IDLE;
 		this.accountCreationQueue = accountCreationQueue;
@@ -110,8 +104,6 @@ public class AccountCreationWorker implements Runnable {
 
 						// Initialize a PTC Creation session
 						PtcSession ptc = new PtcSession(httclient);
-						ptc.setDryRun(dryRun);
-						ptc.setDumpResult(dumpResult);
 
 						// 1. Check password and username before we start
 						if (ptc.isAccountValid(account)) {
