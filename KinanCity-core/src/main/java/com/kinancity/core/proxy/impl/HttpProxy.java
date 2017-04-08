@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
-import org.assertj.core.internal.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -92,6 +91,9 @@ public class HttpProxy implements HttpProxyProvider {
 	 * @return
 	 */
 	public static HttpProxy fromURI(String uri) {
+		if(uri == null){
+			return null;
+		}
 		Matcher matcher = Pattern.compile(URI_REGEXP).matcher(uri);
 		if (matcher.find()) {
 			String host = matcher.group("host");
